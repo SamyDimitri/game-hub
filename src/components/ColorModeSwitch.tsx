@@ -1,40 +1,22 @@
-import {
-  HStack,
-  Switch,
-  Icon,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { HStack, Icon, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const ColorModeSwitch = () => {
   const { toggleColorMode, colorMode } = useColorMode();
 
-  // this will choose sun or moon depending on the theme
+  // This will choose the sun or moon icon depending on the theme
   const IconComponent = useColorModeValue(FaSun, FaMoon);
 
   return (
     <HStack spacing={4}>
-      <Switch
-        isChecked={colorMode === "dark"}
-        onChange={toggleColorMode}
-        sx={{
-          ".chakra-switch__track": {
-            bg: "gray.300", // Light gray when OFF
-            _checked: {
-              bg: "blue.300", // Bright blue when ON
-            },
-          },
-          ".chakra-switch__thumb": {
-            bg: "white", // White circle (optional)
-          },
-        }}
-      />
+      {/* Icon for Sun and Moon */}
       <Icon
-        as={IconComponent} // show sun or moon
-        boxSize={6} // size of the icon
-        transition="transform 0.3s ease" // smooth animation
-        transform={colorMode === "dark" ? "rotate(360deg)" : "rotate(0deg)"} // spin
+        as={IconComponent} // Show sun or moon
+        boxSize={6} // Size of the icon
+        transition="transform 0.3s ease" // Smooth animation
+        transform={colorMode === "dark" ? "rotate(360deg)" : "rotate(0deg)"} // Spin effect
+        onClick={toggleColorMode} // Toggle color mode on click
+        cursor="pointer" // Pointer cursor on hover
       />
     </HStack>
   );
