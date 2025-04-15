@@ -12,7 +12,7 @@ interface Props {
 const NavBar = ({ onSearch, onOpenMenu }: Props) => {
   return (
     <HStack padding="10px" spacing={4} alignItems="center">
-      <Image src={logo} boxSize="60px" />
+      <Image src={logo} boxSize="38px" />
       
         <SearchInput onSearch={onSearch} />
 
