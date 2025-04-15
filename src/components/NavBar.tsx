@@ -1,22 +1,33 @@
-import { Box, HStack, Image } from '@chakra-ui/react'
-import logo from '../assets/logo.png'
-import ColorModeSwitch from './ColorModeSwitch'
-import SearchInput from './SearchInput'
+import { HStack, Image, Show, IconButton } from "@chakra-ui/react";
+import logo from "../assets/logo.png";
+import ColorModeSwitch from "./ColorModeSwitch";
+import SearchInput from "./SearchInput";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 interface Props {
   onSearch: (searchText: string) => void;
+  onOpenMenu: () => void;
 }
 
-const NavBar = ({onSearch}: Props) => {
+const NavBar = ({ onSearch, onOpenMenu }: Props) => {
   return (
-    <HStack padding='10px'>
-      <Image src={logo} boxSize='60px' />
-      <Box flex='1'>
-      <SearchInput onSearch={onSearch}/>
-      </Box>
-      <ColorModeSwitch />
-    </HStack>
-  )
-}
+    <HStack padding="10px" spacing={4} alignItems="center">
+      <Image src={logo} boxSize="60px" />
+      
+        <SearchInput onSearch={onSearch} />
 
-export default NavBar
+      <ColorModeSwitch />
+
+      <Show below="lg">
+        <IconButton
+          icon={<HamburgerIcon />}
+          aria-label="Open Menu"
+          variant="outline"
+          onClick={onOpenMenu}
+        />
+      </Show>
+    </HStack>
+  );
+};
+
+export default NavBar;

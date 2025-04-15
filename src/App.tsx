@@ -3,9 +3,6 @@ import {
   GridItem,
   Grid,
   Show,
-  Flex,
-  Box,
-  IconButton,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -13,8 +10,9 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -46,36 +44,29 @@ function App() {
         lg: "200px 1fr",
       }}
     >
-      <GridItem area="nav">
-        <Flex justify="space-between" align="center" paddingX={4}>
-          <NavBar
-            onSearch={(searchtext) =>
-              setGameQuery({ ...gameQuery, searchtext })
-            }
-          />
-          {/* Hamburger visible only on mobile */}
-          <Show below="lg">
-            <IconButton
-              icon={<HamburgerIcon />}
-              variant="outline"
-              aria-label="Open genre menu"
-              onClick={onOpen}
-            />
-          </Show>
-        </Flex>
+      {/* Navigation Bar */}
+      <GridItem area="nav" paddingX={3}>
+        <NavBar
+          onSearch={(searchtext) =>
+            setGameQuery({ ...gameQuery, searchtext })
+          }
+          onOpenMenu={onOpen}
+        />
       </GridItem>
 
-      {/* Desktop GenreList */}
+      {/* Desktop Sidebar Genre List */}
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
             selectedGenre={gameQuery.genre}
-            onselectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+            onselectGenre={(genre) =>
+              setGameQuery({ ...gameQuery, genre })
+            }
           />
         </GridItem>
       </Show>
 
-      {/* Mobile Drawer GenreList */}
+      {/* Mobile Drawer Genre List */}
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
@@ -86,25 +77,24 @@ function App() {
               selectedGenre={gameQuery.genre}
               onselectGenre={(genre) => {
                 setGameQuery({ ...gameQuery, genre });
-                onClose(); // Close drawer after selection!
+                onClose(); // close drawer after selection
               }}
             />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
 
+      {/* Main Content */}
       <GridItem area="main">
         <Box paddingLeft={3}>
           <GameHeading gameQuery={gameQuery} />
-          <Flex marginBottom={5}>
-            <Box marginRight={5}>
-              <PlatformSelector
-                selectedPlatform={gameQuery.platform}
-                onselectPlatform={(platform) =>
-                  setGameQuery({ ...gameQuery, platform })
-                }
-              />
-            </Box>
+          <Flex marginBottom={5} wrap="wrap" gap={5}>
+            <PlatformSelector
+              selectedPlatform={gameQuery.platform}
+              onselectPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+            />
             <SortSelector
               sortOrder={gameQuery.sortOrder}
               onSelectSortOrder={(sortOrder) =>

@@ -3,13 +3,14 @@ import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 
 interface Props {
-    onSearch: (searchText: string) => void;
+  onSearch: (searchText: string) => void;
 }
 
-const SearchInput = ({onSearch}: Props) => {
+const SearchInput = ({ onSearch }: Props) => {
   const ref = useRef<HTMLInputElement>(null);
   return (
     <form
+      style={{ width: "100%" }}
       onSubmit={(event) => {
         event.preventDefault();
         if (ref.current) onSearch(ref.current.value);
@@ -22,6 +23,7 @@ const SearchInput = ({onSearch}: Props) => {
           borderRadius={12}
           placeholder="Search games..."
           variant="filled"
+          width="100%"
         />
       </InputGroup>
     </form>
