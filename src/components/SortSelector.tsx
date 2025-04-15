@@ -14,7 +14,7 @@ const SortSelector = ({onSelectSortOrder, sortOrder}: Props) => {
     { value: "name", lable: "Name" },
     { value: "-released", lable: "Release Data" },
     { value: "-metacritic", lable: "Popularity" },
-    { value: "-rating", lable: "Average rateing" },
+    { value: "-rating", lable: "Average rating" },
   ];
 
   const currentSortOrder = sortOrders.find(order => order.value === sortOrder);
